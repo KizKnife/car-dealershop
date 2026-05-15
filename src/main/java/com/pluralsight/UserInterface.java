@@ -7,10 +7,6 @@ public class UserInterface {
     private Dealership dealership;
     private Scanner scanner = new Scanner(System.in);
 
-    public void UserInterface() {
-
-    }
-
     private void init() {
         DealershipFileManager fileManager = new DealershipFileManager();
 
@@ -37,39 +33,20 @@ public class UserInterface {
             );
 
             switch (scanner.nextLine()) {
-                case "1":
-                    processGetByPriceRequest();
-                    break;
-                case "2":
-                    processGetByMakeModelRequest();
-                    break;
-                case "3":
-                    processGetByYearRequest();
-                    break;
-                case "4":
-                    processGetByColorRequest();
-                    break;
-                case "5":
-                    processGetByMileageRequest();
-                    break;
-                case "6":
-                    processGetByVehicleTypeRequest();
-                    break;
-                case "7":
-                    processGetAllVehiclesRequest();
-                    break;
-                case "8":
-                    processAddVehicleRequest();
-                    break;
-                case "9":
-                    processRemoveVehicleRequest();
-                    break;
-                case "99":
+                case "1" -> processGetByPriceRequest();
+                case "2" -> processGetByMakeModelRequest();
+                case "3" -> processGetByYearRequest();
+                case "4" -> processGetByColorRequest();
+                case "5" -> processGetByMileageRequest();
+                case "6" -> processGetByVehicleTypeRequest();
+                case "7" -> processGetAllVehiclesRequest();
+                case "8" -> processAddVehicleRequest();
+                case "9" -> processRemoveVehicleRequest();
+                case "99" -> {
                     System.out.printf("Goodbye%n");
                     return;
-                default:
-                    System.out.printf("Invalid option%n");
-                    break;
+                }
+                default -> System.out.printf("Invalid option%n");
             }
         }
     }
