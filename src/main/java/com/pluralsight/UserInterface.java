@@ -62,7 +62,7 @@ public class UserInterface {
                     processAddVehicleRequest();
                     break;
                 case "9":
-                    System.out.printf("9%n");
+                    processRemoveVehicleRequest();
                     break;
                 case "99":
                     System.out.printf("Goodbye%n");
@@ -99,6 +99,7 @@ public class UserInterface {
     }
 
     public void processAddVehicleRequest() {
+        System.out.println("Adding a vehicle:");
         System.out.print("Enter VIN: ");
         int vin = scanner.nextInt();
         scanner.nextLine();
@@ -148,5 +149,32 @@ public class UserInterface {
         System.out.println("Vehicle added!");
     }
 
-    public void processRemoveVehicleRequest() {}
+    public void processRemoveVehicleRequest() {
+        System.out.println("Removing a vehicle:");
+        System.out.print("Enter VIN: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+
+        Vehicle vehicleRemove = null;
+
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.vin == vin) {
+                vehicleRemove = vehicle;
+                break;
+            }
+        }
+
+        if (vehicleRemove != null) {
+            dealership.removeVehicle(vehicleRemove);
+
+            DealershipFileManager manager =
+                    new DealershipFileManager();
+
+            manager.saveDealership(dealership);
+
+            System.out.println("Vehicle removed!%n");
+        } else {
+            System.out.println("No vehicle found!%n");
+        }
+    }
 }
