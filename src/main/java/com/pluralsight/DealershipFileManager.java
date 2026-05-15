@@ -65,14 +65,14 @@ public class DealershipFileManager {
             // vehicles
             for (Vehicle vehicle : dealership.getAllVehicles()) {
                 bufferedWriter.write(
-                        vehicle.vin + "|" +
-                            vehicle.year + "|" +
-                            vehicle.make + "|" +
-                            vehicle.model + "|" +
-                            vehicle.vehicleType + "|" +
-                            vehicle.color + "|" +
-                            vehicle.odometer + "|" +
-                            vehicle.price
+                        vehicle.getVin() + "|" +
+                            vehicle.getYear() + "|" +
+                            vehicle.getMake() + "|" +
+                            vehicle.getModel() + "|" +
+                            vehicle.getVehicleType() + "|" +
+                            vehicle.getColor() + "|" +
+                            vehicle.getOdometer() + "|" +
+                            vehicle.getPrice()
                 );
 
                 bufferedWriter.newLine();

@@ -38,22 +38,22 @@ public class UserInterface {
 
             switch (scanner.nextLine()) {
                 case "1":
-                    System.out.printf("1%n");
+                    processGetByPriceRequest();
                     break;
                 case "2":
-                    System.out.printf("2%n");
+                    processGetByMakeModelRequest();
                     break;
                 case "3":
-                    System.out.printf("3%n");
+                    processGetByYearRequest();
                     break;
                 case "4":
-                    System.out.printf("4%n");
+                    processGetByColorRequest();
                     break;
                 case "5":
-                    System.out.printf("5%n");
+                    processGetByMileageRequest();
                     break;
                 case "6":
-                    System.out.printf("6%n");
+                    processGetByVehicleTypeRequest();
                     break;
                 case "7":
                     processGetAllVehiclesRequest();
@@ -80,17 +80,71 @@ public class UserInterface {
         }
     }
 
-    public void processGetByPriceRequest() {}
+    public void processGetByPriceRequest() {
+        System.out.print("Please enter min price: ");
+        double min = scanner.nextDouble();
+        scanner.nextLine();
 
-    public void processGetByMakeModelRequest() {}
+        System.out.print("Enter max price: $: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine();
 
-    public void processGetByYearRequest() {}
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByPrice(min, max);
+        displayVehicles(vehicles);
+    }
 
-    public void processGetByColorRequest() {}
+    public void processGetByMakeModelRequest() {
+        System.out.print("Enter make: ");
+        String make = scanner.nextLine().trim();
 
-    public void processGetByMileageRequest() {}
+        System.out.print("Enter model: ");
+        String model = scanner.nextLine().trim();
 
-    public void processGetByVehicleTypeRequest() {}
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByMakeModel(make, model);
+        displayVehicles(vehicles);
+    }
+
+    public void processGetByYearRequest() {
+        System.out.print("Please enter min year: ");
+        double min = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.print("Please enter max year: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine();
+
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByYear(min, max);
+        displayVehicles(vehicles);
+    }
+
+    public void processGetByColorRequest() {
+        System.out.print("Please enter color: ");
+        String color = scanner.nextLine();
+
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByColor(color);
+        displayVehicles(vehicles);
+    }
+
+    public void processGetByMileageRequest() {
+        System.out.print("Please enter min mileage: ");
+        double min = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.print("Please enter max mileage: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine();
+
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByMileage(min, max);
+        displayVehicles(vehicles);
+    }
+
+    public void processGetByVehicleTypeRequest() {
+        System.out.print("Please enter vehicle type: ");
+        String vehicleType = scanner.nextLine();
+
+        ArrayList<Vehicle> vehicles = dealership.getVehiclesByType(vehicleType);
+        displayVehicles(vehicles);
+    }
 
     public void processGetAllVehiclesRequest() {
         ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
@@ -158,7 +212,7 @@ public class UserInterface {
         Vehicle vehicleRemove = null;
 
         for (Vehicle vehicle : dealership.getAllVehicles()) {
-            if (vehicle.vin == vin) {
+            if (vehicle.getVin() == vin) {
                 vehicleRemove = vehicle;
                 break;
             }
