@@ -13,6 +13,11 @@ public class Dealership {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.inventory = new ArrayList<>();
+    }
+
+    public Dealership() {
+        this.inventory = new ArrayList<>();
     }
 
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
@@ -40,16 +45,36 @@ public class Dealership {
     }
 
     public ArrayList<Vehicle> getAllVehicles() {
-        return null;
+        return inventory;
     }
 
     public void addVehicle(Vehicle vehicle) {
-
+        inventory.add(vehicle);
     }
 
     public void removeVehicle(Vehicle vehicle) {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Dealership{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", inventory=" + inventory +
+                '}';
+    }
 }
