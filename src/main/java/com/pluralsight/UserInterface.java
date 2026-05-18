@@ -1,6 +1,8 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -28,6 +30,7 @@ public class UserInterface {
                     "7 - List ALL vehicles%n" +
                     "8 - Add a vehicle%n" +
                     "9 - Remove a vehicle%n" +
+                    "10 - Sell/Lease a vehicle" +
                     "99 - Quit%n" +
                     "What do you want to do: "
             );
@@ -42,6 +45,7 @@ public class UserInterface {
                 case "7" -> processGetAllVehiclesRequest();
                 case "8" -> processAddVehicleRequest();
                 case "9" -> processRemoveVehicleRequest();
+                case "10" -> processSellOrLeaseContract();
                 case "99" -> {
                     System.out.printf("Goodbye%n");
                     return;
@@ -206,6 +210,54 @@ public class UserInterface {
             System.out.println("Vehicle removed!%n");
         } else {
             System.out.println("No vehicle found!%n");
+        }
+    }
+
+    public void processSellOrLeaseContract() {
+        System.out.print("Enter VIN: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter Customer Name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter Customer Email: ");
+        String customerEmail = scanner.nextLine();
+
+        System.out.print("Sale or Lease? (Type Sale or Lease): ");
+        String saleOrLease = scanner.nextLine();
+
+        if (!saleOrLease.equalsIgnoreCase("sale") && !saleOrLease.equalsIgnoreCase("lease")) {
+            System.out.println("Please enter valid sale or lease option!");
+            return;
+        }
+
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+
+        if (vehicle == null) {
+            System.out.println("Vehicle not found");
+            return;
+        }
+
+        ContractFileManager contractFileManager = new ContractFileManager();
+
+        if (saleOrLease.equalsIgnoreCase("sale")) {
+            System.out.print("Do you want to finance? True Or False:");
+            boolean isFinanced = scanner.nextBoolean();
+            scanner.nextLine();
+
+            Contract contract = new SalesContract(new Date().toString(), customerName, customerEmail, vehicle, isFinanced);
+            contractFileManager.saveContract(contract);
+        }
+
+        if (saleOrLease.equalsIgnoreCase("lease")) {
+            if (LocalDate.now().getYear() - vehicle.getYear() > 3) {
+                System.out.print("You cannot lease vehicle over 3 years old");
+                return;
+            }
+
+            Contract contract = new LeaseContract(new Date().toString(), customerName, customerEmail, vehicle);
+            contractFileManager.saveContract(contract);
         }
     }
 }
