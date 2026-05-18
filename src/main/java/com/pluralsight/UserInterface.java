@@ -30,7 +30,7 @@ public class UserInterface {
                     "7 - List ALL vehicles%n" +
                     "8 - Add a vehicle%n" +
                     "9 - Remove a vehicle%n" +
-                    "10 - Sell/Lease a vehicle" +
+                    "10 - Sell/Lease a vehicle%n" +
                     "99 - Quit%n" +
                     "What do you want to do: "
             );

@@ -8,7 +8,7 @@ public class ContractFileManager {
 
     public void saveContract(Contract contract) {
         try {
-            FileWriter fileWriter = new FileWriter("contracts.csv");
+            FileWriter fileWriter = new FileWriter("contracts.csv", true);
 
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
