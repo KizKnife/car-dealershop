@@ -35,4 +35,26 @@ public class LeaseContract extends Contract{
     public double getMonthlyPayment() {
         return ((this.getVehicleSold().getPrice() * 0.04) + this.getVehicleSold().getPrice()) / 36;
     }
+
+    @Override
+    public String toString() {
+        Vehicle vehicle = this.getVehicleSold();
+
+        return "LEASE"
+                + '|' + this.getDate()
+                + '|' + this.getCustomerName()
+                + '|' + this.getEmail()
+                + '|' + vehicle.getVin()
+                + '|' + vehicle.getYear()
+                + '|' + vehicle.getMake()
+                + '|' + vehicle.getModel()
+                + '|' + vehicle.getVehicleType()
+                + '|' + vehicle.getColor()
+                + '|' + vehicle.getOdometer()
+                + '|' + vehicle.getPrice()
+                + '|' + this.expectedEndingValue
+                + '|' + this.leaseFee
+                + '|' + this.getTotalPrice()
+                + '|' + this.getMonthlyPayment();
+    }
 }

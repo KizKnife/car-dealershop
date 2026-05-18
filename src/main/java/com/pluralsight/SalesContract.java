@@ -66,4 +66,28 @@ public class SalesContract extends Contract{
         }
         return ((this.getTotalPrice() * 0.0525) + this.getTotalPrice()) / 24;
     }
+
+    @Override
+    public String toString() {
+        Vehicle vehicle = this.getVehicleSold();
+
+        return "SALE"
+                + '|' + this.getDate()
+                + '|' + this.getCustomerName()
+                + '|' + this.getEmail()
+                + '|' + vehicle.getVin()
+                + '|' + vehicle.getYear()
+                + '|' + vehicle.getMake()
+                + '|' + vehicle.getModel()
+                + '|' + vehicle.getVehicleType()
+                + '|' + vehicle.getColor()
+                + '|' + vehicle.getOdometer()
+                + '|' + vehicle.getPrice()
+                + '|' + this.salesTax
+                + '|' + this.recordingFee
+                + '|' + this.processingFee
+                + '|' + this.getTotalPrice()
+                + '|' + this.isFinanced
+                + '|' + this.getMonthlyPayment();
+    }
 }
